@@ -21,7 +21,7 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
-        containerRegistry: 'dockerHub'
+        containerRegistry: 'DockerDevOpsAforo'
         repository: 'uialberto/simple-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
