@@ -37,3 +37,24 @@ stages:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
+#Deploy
+- stage: Deploy
+  displayName: Deploy image
+  jobs:
+  - job: Deploy
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        itemPattern: '**/*.yaml'
+        targetPath: '$(System.ArtifactsDirectory)'
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
+        kubernetesServiceConnection: 'KubernetesAWS'
+        manifests: '$(System.ArtifactsDirectory)/Devops.yaml'
+        containers: 'uialberto/simple-devops:$(tag)'
