@@ -22,7 +22,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'dockerHub'
-        repository: 'antony0618/simple-devops'
+        repository: 'uialberto/simple-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
